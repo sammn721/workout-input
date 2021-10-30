@@ -26,6 +26,14 @@ router.get('/range', (req, res) => {
             }
         }
     }])
+    .sort({ _id: -1 })
+    .limit(7)
+    .then(workout => {
+        res.json(workout.reverse())
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    })
 })
 
 router.put('/:id', ({ body }, res) => {
