@@ -18,6 +18,16 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/range', (req, res) => {
+    Workout.aggregate([{
+        $addFields: {
+            totalDuration: {
+                $sum: '$exercises.duration'
+            }
+        }
+    }])
+})
+
 router.put('/:id', ({ body }, res) => {
     Workout.updateOne({
         id: req.params.id
